@@ -387,15 +387,7 @@ const PropertyDetails = ({
   };
 
   return (
-    <div className="w-full h-full flex flex-col">
-      <Breadcrumb
-        items={[
-          { label: "Dashboard", href: "/" },
-          { label: "Properties", href: "/properties" },
-          { label: property.name }
-        ]}
-      />
-      <div className="flex-1 p-6 space-y-6">
+    <div className="flex-1 p-6 space-y-6">
       {/* Header Section */}
       <div className="flex justify-between items-start">
         <div>
