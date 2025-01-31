@@ -42,16 +42,14 @@ const Home = ({ initialSidebarState = false }: HomeProps) => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100 overflow-hidden relative">
+    <div className="flex h-screen w-full bg-gray-100 overflow-hidden relative">
       <Sidebar
         isCollapsed={sidebarCollapsed}
         onToggle={handleSidebarToggle}
         activeModule={activeModule}
         onModuleSelect={handleModuleSelect}
       />
-      <div
-        className={`flex-1 flex flex-col transition-all duration-300 ${sidebarCollapsed ? "" : ""}`}
-      >
+      <div className="flex-1 flex flex-col min-w-0 w-full transition-all duration-300">
         <Header
           onNotificationsClick={() => setShowNotifications(!showNotifications)}
         />

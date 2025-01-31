@@ -90,7 +90,7 @@ const PropertiesPage = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="w-full h-full p-6 space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Properties</h1>
         <Button onClick={() => navigate("/properties/new")}>

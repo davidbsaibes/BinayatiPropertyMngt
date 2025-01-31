@@ -11,7 +11,7 @@ const basename = import.meta.env.BASE_URL;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <div className="flex">
+    <div className="flex w-full h-full">
       <BrowserRouter basename={basename}>
         <App />
       </BrowserRouter>

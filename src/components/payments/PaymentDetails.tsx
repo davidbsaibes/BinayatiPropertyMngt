@@ -89,7 +89,7 @@ const PaymentDetails = () => {
   };
 
   return (
-    <div className="w-full p-6 space-y-6">
+    <div className="w-full h-full p-6 space-y-6">
       <Breadcrumb
         items={[
           { label: "Dashboard", href: "/" },
