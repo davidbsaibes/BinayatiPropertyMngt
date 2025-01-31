@@ -15,6 +15,70 @@ import {
 
 interface PropertyDetailsProps {
   property?: {
+    documents: Array<{
+      id: string;
+      name: string;
+      type: string;
+      uploadDate: string;
+      size: string;
+      category: string;
+      status: string;
+    }>;
+    utilities: {
+      accounts: Array<{
+        service: string;
+        provider: string;
+        accountNumber: string;
+        billingCycle: string;
+        averageMonthlyBill: number;
+      }>;
+      meters: Array<{
+        type: string;
+        number: string;
+        location: string;
+        lastReading: string;
+        nextReading: string;
+      }>;
+      contracts: Array<{
+        provider: string;
+        service: string;
+        startDate: string;
+        endDate: string;
+        terms: string;
+      }>;
+    };
+    legal: {
+      permits: Array<{
+        type: string;
+        number: string;
+        issueDate: string;
+        expiryDate: string;
+        status: string;
+      }>;
+      certificates: Array<{
+        type: string;
+        number: string;
+        issueDate: string;
+        expiryDate: string;
+        issuingAuthority: string;
+      }>;
+      insurance: Array<{
+        type: string;
+        provider: string;
+        policyNumber: string;
+        coverage: number;
+        startDate: string;
+        endDate: string;
+      }>;
+      contracts: Array<{
+        type: string;
+        party: string;
+        startDate: string;
+        endDate: string;
+        value: number;
+        status: string;
+      }>;
+    };
     id: string;
     name: string;
     type: string;
@@ -91,6 +155,133 @@ interface PropertyDetailsProps {
 }
 
 const defaultProperty = {
+  documents: [
+    {
+      id: "DOC1",
+      name: "Building Permit.pdf",
+      type: "Permit",
+      uploadDate: "2024-01-15",
+      size: "2.5 MB",
+      category: "Legal",
+      status: "Active",
+    },
+    {
+      id: "DOC2",
+      name: "Insurance Policy.pdf",
+      type: "Insurance",
+      uploadDate: "2024-02-01",
+      size: "1.8 MB",
+      category: "Insurance",
+      status: "Active",
+    },
+    {
+      id: "DOC3",
+      name: "Maintenance Contract.pdf",
+      type: "Contract",
+      uploadDate: "2024-03-10",
+      size: "3.2 MB",
+      category: "Maintenance",
+      status: "Under Review",
+    },
+  ],
+  utilities: {
+    accounts: [
+      {
+        service: "Electricity",
+        provider: "Power Corp",
+        accountNumber: "ELEC-123456",
+        billingCycle: "Monthly",
+        averageMonthlyBill: 5000,
+      },
+      {
+        service: "Water",
+        provider: "City Water",
+        accountNumber: "WAT-789012",
+        billingCycle: "Bi-monthly",
+        averageMonthlyBill: 2000,
+      },
+    ],
+    meters: [
+      {
+        type: "Electric",
+        number: "E-12345",
+        location: "Main Building Basement",
+        lastReading: "2024-03-15",
+        nextReading: "2024-04-15",
+      },
+      {
+        type: "Water",
+        number: "W-67890",
+        location: "Utility Room",
+        lastReading: "2024-03-01",
+        nextReading: "2024-05-01",
+      },
+    ],
+    contracts: [
+      {
+        provider: "Power Corp",
+        service: "Electricity",
+        startDate: "2024-01-01",
+        endDate: "2024-12-31",
+        terms: "Fixed rate contract at $0.12/kWh",
+      },
+    ],
+  },
+  legal: {
+    permits: [
+      {
+        type: "Building Permit",
+        number: "BP-2024-001",
+        issueDate: "2024-01-01",
+        expiryDate: "2024-12-31",
+        status: "Active",
+      },
+      {
+        type: "Fire Safety",
+        number: "FS-2024-002",
+        issueDate: "2024-02-15",
+        expiryDate: "2025-02-14",
+        status: "Active",
+      },
+    ],
+    certificates: [
+      {
+        type: "Safety Certificate",
+        number: "SC-2024-001",
+        issueDate: "2024-01-01",
+        expiryDate: "2024-12-31",
+        issuingAuthority: "City Safety Department",
+      },
+    ],
+    insurance: [
+      {
+        type: "Property Insurance",
+        provider: "SafeGuard Insurance",
+        policyNumber: "POL-123456",
+        coverage: 5000000,
+        startDate: "2024-01-01",
+        endDate: "2024-12-31",
+      },
+      {
+        type: "Liability Insurance",
+        provider: "SecureLife Corp",
+        policyNumber: "POL-789012",
+        coverage: 2000000,
+        startDate: "2024-01-01",
+        endDate: "2024-12-31",
+      },
+    ],
+    contracts: [
+      {
+        type: "Maintenance",
+        party: "BuildingCare Services",
+        startDate: "2024-01-01",
+        endDate: "2024-12-31",
+        value: 60000,
+        status: "Active",
+      },
+    ],
+  },
   id: "1",
   name: "Sunset Apartments",
   type: "Residential Complex",
@@ -110,6 +301,8 @@ const defaultProperty = {
   images: [
     "https://images.unsplash.com/photo-1568605114967-8130f3a36994",
     "https://images.unsplash.com/photo-1570129477492-45c003edd2be",
+    "https://images.unsplash.com/photo-1564013799919-ab600027ffc6",
+    "https://images.unsplash.com/photo-1580587771525-78b9dba3b914",
   ],
   owner: {
     name: "John Smith",
@@ -135,6 +328,11 @@ const defaultProperty = {
         description: "HVAC System Upgrade",
         cost: 75000,
       },
+      {
+        date: "2022-08",
+        description: "Exterior Painting",
+        cost: 35000,
+      },
     ],
     utilities: {
       electric: "SO-123456",
@@ -152,10 +350,18 @@ const defaultProperty = {
         endDate: "2024-12-31",
         amount: 2500,
       },
+      {
+        tenantName: "Bob Wilson",
+        startDate: "2023-03-01",
+        endDate: "2024-02-29",
+        amount: 2600,
+      },
     ],
     expenses: [
       { category: "Maintenance", monthly: 2000, annual: 24000 },
       { category: "Insurance", monthly: 1000, annual: 12000 },
+      { category: "Property Tax", monthly: 1500, annual: 18000 },
+      { category: "Utilities", monthly: 3000, annual: 36000 },
     ],
     revenue: {
       rental: 60000,
@@ -344,6 +550,28 @@ const PropertyDetails = ({
                   </div>
                 </div>
 
+                <div>
+                  <h3 className="font-medium mb-2">Monthly Expenses</h3>
+                  <div className="space-y-2">
+                    {property.financial.expenses.map((expense, index) => (
+                      <div
+                        key={index}
+                        className="p-3 border rounded-lg flex justify-between items-center"
+                      >
+                        <p className="font-medium">{expense.category}</p>
+                        <div className="text-right">
+                          <p className="font-medium">
+                            ${expense.monthly.toLocaleString()}/month
+                          </p>
+                          <p className="text-sm text-gray-500">
+                            ${expense.annual.toLocaleString()}/year
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 {property.financial.mortgage && (
                   <div>
                     <h3 className="font-medium mb-2">Mortgage Details</h3>
@@ -373,7 +601,271 @@ const PropertyDetails = ({
             </Card>
           </TabsContent>
 
-          {/* Add other tab contents similarly */}
+          <TabsContent value="physical">
+            <Card>
+              <CardHeader className="text-lg font-semibold">
+                Physical Information
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <h3 className="font-medium">Total Size</h3>
+                    <p>{property.physical.size.toLocaleString()} sqft</p>
+                  </div>
+                  <div>
+                    <h3 className="font-medium">Number of Units</h3>
+                    <p>{property.physical.units} units</p>
+                  </div>
+                  <div>
+                    <h3 className="font-medium">Year Built</h3>
+                    <p>{property.physical.yearBuilt}</p>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="font-medium mb-2">Recent Renovations</h3>
+                  <div className="space-y-2">
+                    {property.physical.renovations.map((renovation, index) => (
+                      <div
+                        key={index}
+                        className="p-3 border rounded-lg flex justify-between items-center"
+                      >
+                        <div>
+                          <p className="font-medium">
+                            {renovation.description}
+                          </p>
+                          <p className="text-sm text-gray-500">
+                            Date: {renovation.date}
+                          </p>
+                        </div>
+                        <p className="font-medium">
+                          ${renovation.cost.toLocaleString()}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="font-medium mb-2">Utility Accounts</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="p-3 border rounded-lg">
+                      <p className="text-sm text-gray-500">Electric</p>
+                      <p className="font-medium">
+                        {property.physical.utilities.electric}
+                      </p>
+                    </div>
+                    <div className="p-3 border rounded-lg">
+                      <p className="text-sm text-gray-500">Water</p>
+                      <p className="font-medium">
+                        {property.physical.utilities.water}
+                      </p>
+                    </div>
+                    <div className="p-3 border rounded-lg">
+                      <p className="text-sm text-gray-500">Gas</p>
+                      <p className="font-medium">
+                        {property.physical.utilities.gas}
+                      </p>
+                    </div>
+                    <div className="p-3 border rounded-lg">
+                      <p className="text-sm text-gray-500">Internet</p>
+                      <p className="font-medium">
+                        {property.physical.utilities.internet}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="documents">
+            <Card>
+              <CardHeader className="text-lg font-semibold">
+                Documents
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="space-y-4">
+                  {property.documents.map((doc) => (
+                    <div
+                      key={doc.id}
+                      className="p-4 border rounded-lg flex items-center justify-between"
+                    >
+                      <div>
+                        <p className="font-medium">{doc.name}</p>
+                        <div className="flex gap-4 text-sm text-gray-500">
+                          <p>Type: {doc.type}</p>
+                          <p>Category: {doc.category}</p>
+                          <p>Size: {doc.size}</p>
+                        </div>
+                        <p className="text-sm text-gray-500">
+                          Uploaded:{" "}
+                          {new Date(doc.uploadDate).toLocaleDateString()}
+                        </p>
+                      </div>
+                      <Badge variant="secondary">{doc.status}</Badge>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="utilities">
+            <Card>
+              <CardHeader className="text-lg font-semibold">
+                Utility Management
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <h3 className="font-medium mb-3">Utility Accounts</h3>
+                  <div className="space-y-3">
+                    {property.utilities.accounts.map((account, index) => (
+                      <div key={index} className="p-4 border rounded-lg">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <p className="font-medium">{account.service}</p>
+                            <p className="text-sm text-gray-500">
+                              {account.provider}
+                            </p>
+                          </div>
+                          <p className="font-medium">
+                            ${account.averageMonthlyBill.toLocaleString()}/month
+                          </p>
+                        </div>
+                        <div className="mt-2 text-sm text-gray-500">
+                          <p>Account: {account.accountNumber}</p>
+                          <p>Billing Cycle: {account.billingCycle}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="font-medium mb-3">Meters</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    {property.utilities.meters.map((meter, index) => (
+                      <div key={index} className="p-4 border rounded-lg">
+                        <p className="font-medium">{meter.type}</p>
+                        <p className="text-sm">Number: {meter.number}</p>
+                        <p className="text-sm text-gray-500">
+                          Location: {meter.location}
+                        </p>
+                        <div className="mt-2 text-sm">
+                          <p>Last Reading: {meter.lastReading}</p>
+                          <p>Next Reading: {meter.nextReading}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="font-medium mb-3">Service Contracts</h3>
+                  <div className="space-y-3">
+                    {property.utilities.contracts.map((contract, index) => (
+                      <div key={index} className="p-4 border rounded-lg">
+                        <div className="flex justify-between">
+                          <p className="font-medium">{contract.service}</p>
+                          <p className="text-sm">{contract.provider}</p>
+                        </div>
+                        <p className="text-sm text-gray-500 mt-2">
+                          {new Date(contract.startDate).toLocaleDateString()} -
+                          {new Date(contract.endDate).toLocaleDateString()}
+                        </p>
+                        <p className="text-sm mt-1">{contract.terms}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="legal">
+            <Card>
+              <CardHeader className="text-lg font-semibold">
+                Legal Information
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <h3 className="font-medium mb-3">Permits & Licenses</h3>
+                  <div className="space-y-3">
+                    {property.legal.permits.map((permit, index) => (
+                      <div key={index} className="p-4 border rounded-lg">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <p className="font-medium">{permit.type}</p>
+                            <p className="text-sm">Number: {permit.number}</p>
+                          </div>
+                          <Badge variant="secondary">{permit.status}</Badge>
+                        </div>
+                        <p className="text-sm text-gray-500 mt-2">
+                          Valid:{" "}
+                          {new Date(permit.issueDate).toLocaleDateString()} -
+                          {new Date(permit.expiryDate).toLocaleDateString()}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="font-medium mb-3">Insurance Policies</h3>
+                  <div className="space-y-3">
+                    {property.legal.insurance.map((policy, index) => (
+                      <div key={index} className="p-4 border rounded-lg">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <p className="font-medium">{policy.type}</p>
+                            <p className="text-sm">{policy.provider}</p>
+                          </div>
+                          <p className="font-medium">
+                            ${policy.coverage.toLocaleString()}
+                          </p>
+                        </div>
+                        <div className="mt-2 text-sm text-gray-500">
+                          <p>Policy: {policy.policyNumber}</p>
+                          <p>
+                            Valid:{" "}
+                            {new Date(policy.startDate).toLocaleDateString()} -
+                            {new Date(policy.endDate).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="font-medium mb-3">Service Contracts</h3>
+                  <div className="space-y-3">
+                    {property.legal.contracts.map((contract, index) => (
+                      <div key={index} className="p-4 border rounded-lg">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <p className="font-medium">{contract.type}</p>
+                            <p className="text-sm">{contract.party}</p>
+                          </div>
+                          <Badge variant="secondary">{contract.status}</Badge>
+                        </div>
+                        <div className="mt-2 text-sm">
+                          <p className="text-gray-500">
+                            {new Date(contract.startDate).toLocaleDateString()}{" "}
+                            -{new Date(contract.endDate).toLocaleDateString()}
+                          </p>
+                          <p className="font-medium mt-1">
+                            Value: ${contract.value.toLocaleString()}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
         </ScrollArea>
       </Tabs>
     </div>
