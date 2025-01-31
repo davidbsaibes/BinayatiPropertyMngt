@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Plus } from "lucide-react";
 import PropertySearch from "../dashboard/PropertySearch";
+import Breadcrumb from "../common/Breadcrumb";
 
 interface Property {
   id: string;
@@ -90,91 +91,98 @@ const PropertiesPage = () => {
   };
 
   return (
-    <div className="w-full h-full p-6 space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Properties</h1>
-        <Button onClick={() => navigate("/properties/new")}>
-          <Plus className="h-4 w-4 mr-2" /> Add Property
-        </Button>
-      </div>
-
-      <PropertySearch
-        onSearch={(term) => console.log("Search:", term)}
-        onStatusFilter={(status) => console.log("Status:", status)}
-        onRentRangeFilter={(range) => console.log("Range:", range)}
+    <div className="w-full h-full flex flex-col">
+      <Breadcrumb
+        items={[{ label: "Dashboard", href: "/" }, { label: "Properties" }]}
       />
+      <div className="flex-1 p-6 space-y-6">
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Properties</h1>
+          <Button onClick={() => navigate("/properties/new")}>
+            <Plus className="h-4 w-4 mr-2" /> Add Property
+          </Button>
+        </div>
 
-      <div className="space-y-4">
-        {properties.map((property) => (
-          <Card
-            key={property.id}
-            className="cursor-pointer hover:shadow-lg transition-shadow duration-200"
-            onClick={() => navigate(`/properties/${property.id}`)}
-          >
-            <CardContent className="p-0">
-              <div className="flex">
-                <div className="w-72 h-48">
-                  <img
-                    src={property.image}
-                    alt={property.title}
-                    className="w-full h-full object-cover rounded-l-lg"
-                  />
-                </div>
-                <div className="flex-1 p-6">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="text-xl font-semibold">
-                        {property.title}
-                      </h3>
-                      <p className="text-gray-500">{property.address}</p>
-                    </div>
-                    <Badge
-                      variant="secondary"
-                      className={statusColors[property.status]}
-                    >
-                      {property.status.charAt(0).toUpperCase() +
-                        property.status.slice(1)}
-                    </Badge>
+        <PropertySearch
+          onSearch={(term) => console.log("Search:", term)}
+          onStatusFilter={(status) => console.log("Status:", status)}
+          onRentRangeFilter={(range) => console.log("Range:", range)}
+        />
+
+        <div className="space-y-4">
+          {properties.map((property) => (
+            <Card
+              key={property.id}
+              className="cursor-pointer hover:shadow-lg transition-shadow duration-200"
+              onClick={() => navigate(`/properties/${property.id}`)}
+            >
+              <CardContent className="p-0">
+                <div className="flex">
+                  <div className="w-72 h-48">
+                    <img
+                      src={property.image}
+                      alt={property.title}
+                      className="w-full h-full object-cover rounded-l-lg"
+                    />
                   </div>
-                  <p className="mt-2 text-gray-600">{property.description}</p>
-                  <div className="mt-4 flex items-center gap-6">
-                    <div>
-                      <span className="font-semibold">{property.bedrooms}</span>{" "}
-                      <span className="text-gray-500">Beds</span>
-                    </div>
-                    <div>
-                      <span className="font-semibold">
-                        {property.bathrooms}
-                      </span>{" "}
-                      <span className="text-gray-500">Baths</span>
-                    </div>
-                    <div>
-                      <span className="font-semibold">
-                        {property.sqft.toLocaleString()}
-                      </span>{" "}
-                      <span className="text-gray-500">sqft</span>
-                    </div>
-                    <div className="ml-auto">
-                      <span className="text-2xl font-bold">
-                        ${property.rent.toLocaleString()}
-                      </span>
-                      <span className="text-gray-500">/month</span>
-                    </div>
-                  </div>
-                  <div className="mt-4 flex gap-2 flex-wrap">
-                    {property.features.map((feature, index) => (
-                      <Badge key={index} variant="outline">
-                        {feature}
+                  <div className="flex-1 p-6">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h3 className="text-xl font-semibold">
+                          {property.title}
+                        </h3>
+                        <p className="text-gray-500">{property.address}</p>
+                      </div>
+                      <Badge
+                        variant="secondary"
+                        className={statusColors[property.status]}
+                      >
+                        {property.status.charAt(0).toUpperCase() +
+                          property.status.slice(1)}
                       </Badge>
-                    ))}
+                    </div>
+                    <p className="mt-2 text-gray-600">{property.description}</p>
+                    <div className="mt-4 flex items-center gap-6">
+                      <div>
+                        <span className="font-semibold">
+                          {property.bedrooms}
+                        </span>{" "}
+                        <span className="text-gray-500">Beds</span>
+                      </div>
+                      <div>
+                        <span className="font-semibold">
+                          {property.bathrooms}
+                        </span>{" "}
+                        <span className="text-gray-500">Baths</span>
+                      </div>
+                      <div>
+                        <span className="font-semibold">
+                          {property.sqft.toLocaleString()}
+                        </span>{" "}
+                        <span className="text-gray-500">sqft</span>
+                      </div>
+                      <div className="ml-auto">
+                        <span className="text-2xl font-bold">
+                          ${property.rent.toLocaleString()}
+                        </span>
+                        <span className="text-gray-500">/month</span>
+                      </div>
+                    </div>
+                    <div className="mt-4 flex gap-2 flex-wrap">
+                      {property.features.map((feature, index) => (
+                        <Badge key={index} variant="outline">
+                          {feature}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

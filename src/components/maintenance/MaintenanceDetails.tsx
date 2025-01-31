@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import Breadcrumb from "../common/Breadcrumb";
 import {
   ClipboardList,
   User,
@@ -148,7 +149,15 @@ const MaintenanceDetails = () => {
   };
 
   return (
-    <div className="w-full h-full p-6 space-y-6">
+    <div className="w-full h-full flex flex-col">
+      <Breadcrumb
+        items={[
+          { label: "Dashboard", href: "/" },
+          { label: "Maintenance", href: "/maintenance" },
+          { label: request.title }
+        ]}
+      />
+      <div className="flex-1 p-6 space-y-6">
       {/* Header */}
       <div className="flex justify-between items-start">
         <div>

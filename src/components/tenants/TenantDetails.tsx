@@ -138,7 +138,7 @@ const TenantDetails = () => {
   };
 
   return (
-    <div className="w-full h-full p-6 space-y-6">
+    <div className="w-full h-full flex flex-col">
       <Breadcrumb
         items={[
           { label: "Dashboard", href: "/" },
