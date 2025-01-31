@@ -30,7 +30,9 @@ const MasterLayout = ({ children }: MasterLayoutProps) => {
         <Header
           onNotificationsClick={() => setShowNotifications(!showNotifications)}
         />
-        <main className="flex-1 overflow-auto bg-gray-50">{children}</main>
+        <main className="flex-1 overflow-auto bg-gray-50 w-full">
+          {children}
+        </main>
         <Footer />
       </div>
     </div>
